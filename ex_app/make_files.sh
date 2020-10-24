@@ -31,6 +31,7 @@
     	shell_exec('sudo cp ' . $staticFilesDir . '/pwa-192x192.png ' . $staticDir . '/pwa-192x192.png');
     	shell_exec('sudo cp ' . $staticFilesDir . '/pwa-512x512.png ' . $staticDir . '/pwa-512x512.png');
     }else{
+    	shell_exec('sudo cp -r ' . $staticFilesDir . '/react ' . $staticDir);
     	shell_exec('sudo cp ' . $staticFilesDir . '/404_prod.html ' . $staticDir . '/404.html');
     	shell_exec('sudo cp ' . $staticFilesDir . '/index_prod.html ' . $staticDir . '/index.html');
     }

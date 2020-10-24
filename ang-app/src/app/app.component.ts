@@ -88,9 +88,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	
 	ngAfterViewInit(){
 		this.storageService.localStorageSetItem('loadedApp_' + this.getAppId(),'1',false);
-		this.reactAppLink = this.isLocalhost ?  '..' : 'https://desiderata-cdn.s3-us-west-2.amazonaws.com';
-		this.reactAppLink += this.isLocalhost ? '/desiderata' : '';
-		this.reactAppLink += '/react/index.html';
+		this.reactAppLink = './desiderata/react/index.html';
 		this.loadReactApp();
 	}
 	
@@ -100,6 +98,7 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 			return;
 		}
 		elem.src = this.reactAppLink;
+		elem.style.height = (window.innerHeight - 80) + 'px';
 		setTimeout(() => {
 			elem.style.display = 'block';
 		},200);

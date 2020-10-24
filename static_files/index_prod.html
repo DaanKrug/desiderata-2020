@@ -48,6 +48,13 @@
         	</main>
     	</div>
     	<script>
+    	    const domains = [
+	    		'http://localhost',
+	    	    'https://desiderata.skallerten.com.br',
+	    	    'https://www.desiderata.skallerten.com.br',
+	    	    'https://desiderata-cdn.s3-us-west-2.amazonaws.com',
+	    	    'https://desiderata-cdn.s3-us-west-2.amazonaws.com',
+	    	];
     	    var url = null != window.parent ? window.parent.location.href : window.location.href;
         	var appId = document.querySelector('meta[name="app-id"]').content;
         	var appPrefix = document.querySelector('meta[name="app-prefix"]').content;
