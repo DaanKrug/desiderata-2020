@@ -26,6 +26,7 @@ import { AppLogService } from '../general/applog/applog.service';
 import { SimpleMailService } from '../general/simplemail/simplemail.service';
 
 import { UserService } from '../management/user/user.service';
+import { CancerdiagnosticService } from '../management/user/cancerdiagnostic/cancerdiagnostic.service';
 import { ImageService } from '../management/image/image.service';
 import { FileService } from '../management/file/file.service';
 import { PageMenuService } from '../management/pagemenu/pagemenu.service';
@@ -43,6 +44,7 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
     appLogService: AppLogService;
     simpleMailService: SimpleMailService;
     userService: UserService;
+    cancerdiagnosticService: CancerdiagnosticService;
     imageService: ImageService;
     fileService: FileService;
 	pageMenuService: PageMenuService;
@@ -218,6 +220,10 @@ export class BaseCrudFilterComponent extends BaseCrudComponent implements OnInit
         if(toAactivateServices.includes('user')){
         	this.userService = new UserService(this.http);
       	    this.injectServiceDependencies(this.userService);
+		}
+        if(toAactivateServices.includes('cancerdiagnostic')){
+        	this.cancerdiagnosticService = new CancerdiagnosticService(this.http);
+      	    this.injectServiceDependencies(this.cancerdiagnosticService);
 		}
         if(toAactivateServices.includes('image')){
         	this.imageService = new ImageService(this.http);

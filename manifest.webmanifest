@@ -1,7 +1,7 @@
 {
-  "name": "Desiderata 2020 App",
-  "short_name": "Desiderata 2020 App",
-  "description": "Desiderata 2020 App",
+  "name": "SICIN - Sistema de Informação do Câncer Infantil",
+  "short_name": "SICIN",
+  "description": "SICIN - Sistema de Informação do Câncer Infantil",
   "icons": [{
     "src": "https://desiderata-cdn.s3-us-west-2.amazonaws.com/pwa-192x192.png",
     "sizes": "192x192",

@@ -236,13 +236,15 @@
 								                      (clickEmitter)="filesView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
+								<!-- 
 								<rich-dropdown-button label="Imagens" 
 						    	                      [activated]="view == 'images'" 
 						    	                      [noRender]="!fullButtonsManager"
 								                      (clickEmitter)="imagesView()"
 								                      (clickEmitter1)="drd2.close()">
 								</rich-dropdown-button>
-								<rich-dropdown-button label="Pessoas / Usu&aacute;rios" 
+								-->
+								<rich-dropdown-button label="Pacientes / Profissionais" 
 						    	                      [activated]="view == 'users'" 
 						    	                      [noRender]="!userButtonsManager"
 								                      (clickEmitter)="usersView()"
@@ -335,10 +337,6 @@
 		     style="margin-top: .3rem !important;">
 		    <div class="row justify-content-center"
 		    	 style="overflow: auto; max-height: 99vh;">
-		    	<div class="header" 
-		    	     style="width: 99%; margin: 0 auto; text-align: center; border-radius: .2em;">
-		    		Conteúdo público 
-		    	</div>
 		    	<iframe id="iframeReactApp"
 		    	        src=""
 		    	        style="width: 100%; height: 20em; border: 0; display: none;">
@@ -407,12 +405,14 @@
 								                  [activated]="view == 'filesView()'" 
 								                  [noRender]="!fileButtonsManager">
 								</rich-menu-button>
+								<!--
 						    	<rich-menu-button label="Imagens" 
 						    	                  (clickEmitter)="imagesView()" 
 								                  [activated]="view == 'images'" 
 								                  [noRender]="!fullButtonsManager">
 								</rich-menu-button>
-						    	<rich-menu-button label="Pessoas / Usu&aacute;rios" 
+								-->
+						    	<rich-menu-button label="Pacientes / Profissionais" 
 						    	                  (clickEmitter)="usersView()" 
 								                  [activated]="view == 'users'" 
 								                  [noRender]="!userButtonsManager">
@@ -420,7 +420,7 @@
 							</div>
 						</div>
 				    </div>
-				    <div class="card" 
+				    <div class="card none" 
 				         style="margin-bottom: 0.3em;">
 				        <rich-menu-button label="Gerenciar" 
 				                          (clickEmitter)="showMenuIndex(3)" 

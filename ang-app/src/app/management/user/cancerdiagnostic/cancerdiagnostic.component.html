@@ -1,0 +1,215 @@
+<form-toolbar [title]="title" [editing]="editing" [searchForm]="searchForm" 
+			  (onSearchFormSubmitEmitter)="onSearchFormSubmit()" (listDataEmitter)="listData()"
+			  (listDataNoCacheEmitter)="listDataNoCache()"
+			  [auditingExclusions]="auditingExclusions"
+			  [enabledAuditList]="['admin_master'].includes(logged.category)"
+			  (auditListEmitter)="auditList()" (normalListEmitter)="normalList()"
+			  [disabledAddNew]="!(['admin_master'].includes(logged.category))
+	                              && !(['admin'].includes(logged.category) 
+	                              && permissions.includes('cancerdiagnostic_write'))"
+			  (addObjectEmitter)="addObject()"    
+			  [backToOrigin]="true" (backToOriginEmitter)="backToOrigin()">
+</form-toolbar>
+
+<ng-template [ngIf]="editing" [ngIfElse]="listObjects">
+	<section aria-label="cadastro e alteracao de Diagn&oacute;stico Cancers" class="dataForm"> 
+		<form [formGroup]="dataForm" (ngSubmit)="onObjectFormSubmit()">   	
+			<div>	
+				<rich-date-picker [formGroup]="dataForm" 
+				                  label="Data Diagn. (*)" 
+				                  titlee="Data Diagn&oacute;stico" 
+				                  placeholderr=""
+				                  formControlName="a3_date" 
+				                  widthPerc="23" 
+				                  ngDefaultControl>
+				</rich-date-picker>
+   				<rich-filter-selector id="selectCancerType" 
+				                      label="Tipo Cancer (*)"
+				                      titlee="Tipo Cancer" 
+				                      widthPerc="75"
+					                  emptyLabel="Selecione" 
+					                  onlySelect="true"
+				                      [selectedObject]="selectedCancer" 
+				                      [objects]="cancerTypes"
+				                      (valueChangedEmitter)="setSelectedCancerType($event)" >
+				</rich-filter-selector>
+				
+				<div class="field" style="width: 33%">
+					<rich-filter-selector id="selectLevel1" 
+					                      label="Nível 1 (*)"
+					                      titlee="Nível 1 " 
+					                      widthPerc="100"
+						                  emptyLabel="Desconhecido" 
+						                  onlySelect="true"
+					                      [selectedObject]="selectedLevel1" 
+					                      [objects]="levels1"
+					                      (valueChangedEmitter)="setSelectedLevel1($event)" >
+					</rich-filter-selector>
+					<rich-filter-selector id="selectLevel2" 
+					                      label="Nível 2 (*)"
+					                      titlee="Nível 2 " 
+					                      widthPerc="100"
+						                  emptyLabel="Desconhecido" 
+						                  onlySelect="true"
+					                      [selectedObject]="selectedLevel2" 
+					                      [objects]="levels2"
+					                      (valueChangedEmitter)="setSelectedLevel2($event)" >
+					</rich-filter-selector>
+				</div>
+				<div class="field" style="width: 60%; float: right !important;">
+					<div>
+						<div id="estadiamentInfoContainer" 
+						     class="fieldset"
+						     style="height: 10em; overflow-y: auto; 
+						            font-size: .85rem; text-align: justify;
+						            margin: .6em .4em .4em .4em;">
+						</div>
+					</div>
+				</div>
+				
+				<rich-input-text [formGroup]="dataForm" 
+            	                 label="Estadiamento" 
+            	                 titlee="Estadiamento" 
+            	                 maxchars="100"
+            	                 [onlyRead]="true"
+            	                 formControlName="a2_cancerestadiament" 
+            	                 widthPerc="100" 
+            	                 ngDefaultControl>
+                </rich-input-text>
+				
+				<div class="clear"></div>
+			</div> 
+			<form-action [validationMessages]="validationMessages" 
+			             [processValidation]="processValidation" 
+			             (cancelDataEmitter)="cancelData()">
+			</form-action>
+		</form>
+	</section>
+</ng-template>
+
+<ng-template #listObjects>
+	<section aria-label="lista dos Diagnósticos Cancer">
+		<table class="table" *ngIf="objects as listOfObject" mdbTable> 
+			<thead class="black white-text">
+				<tr>
+					<th scope="col" style="width: auto;" 
+					    title="Tipo C&acirc;ncer" 
+					    aria-label="Tipo C&acirc;ncer">
+						Tipo C&acirc;ncer
+					</th>
+					<th scope="col" style="width: 10rem;" 
+					    title="Estadiamento" 
+					    aria-label="Estadiamento">
+						Estadiamento
+					</th>
+					<th scope="col" style="width: 8rem;" 
+					    title="Data Diagn&oacute;stico" 
+					    aria-label="Data Diagn&oacute;stico">
+						Data Diagn&oacute;stico
+					</th>
+					<th scope="col" style="width: 7em;" 
+					    *ngIf="!auditingExclusions">A&ccedil;&otilde;es</th>
+					<th scope="col" style="width: 5em;" 
+					    *ngIf="auditingExclusions">A&ccedil;&otilde;es</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr mdbTableCol *ngFor="let cancerdiagnostic of objects; trackBy: trackById">
+					<td class="text" [innerHtml]="cancerdiagnostic.a1_cancertype"></td>
+					<td class="text" [innerHtml]="cancerdiagnostic.a2_cancerestadiament"></td>
+					<td class="number" [innerHtml]="cancerdiagnostic.a3_dateLabel"></td>
+					<td class="actions">
+						<div class="buttons">
+							<edit-delete-action [auditingExclusions]="auditingExclusions" 
+							                    [object]="cancerdiagnostic" 
+							                    [logged]="logged"
+							                    [noAction]="!(['admin_master'].includes(logged.category))
+								                              && !(['admin'].includes(logged.category) 
+								                              && permissions.includes('cancerdiagnostic_write'))" 
+							                    (editObjectEmitter)="editObject($event)"
+							                    [objectDetail]="objectDetail" 
+							                    (showObjectEmitter)="showObject($event)"
+							                    [objectDeleteConfirmation]="objectDeleteConfirmation" 
+							                    (deleteObjectEmitter)="deleteObject($event)"
+							                    [objectUnDeleteConfirmation]="objectUnDeleteConfirmation" 
+							                    (unDeleteObjectEmitter)="unDeleteObject($event)">
+							</edit-delete-action>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="navigationBottom">
+						<table-navigator [pages]="pages" [selectedPage]="selectedPage" 
+						                 [previousPageDisabled]="previousPageDisabled" 
+						                 [nextPageDisabled]="nextPageDisabled" 
+						                 [rowsPerPage]="rowsPerPage" [totalPages]="totalPages" 
+						                 [totalRows]="totalRows"
+						                 (previousPageEmitter)="previousPage()" 
+						                 (setPageEmitter)="setPage($event)"
+						                 (nextPageEmitter)="nextPage()">
+						</table-navigator>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</ng-template>
+
+<ng-template #selectedObjectTemplate>
+	<tr>
+		<th scope="row" class="text" style="width: 12em;"
+ 		    title="Tipo C&acirc;ncer"
+ 		    aria-label="Tipo C&acirc;ncer">
+ 			Tipo C&acirc;ncer:
+ 		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a1_cancertype"></td>
+	</tr>
+	<tr>
+		<th scope="row" class="text"
+		    title="Estadiamento"
+		    aria-label="Estadiamento">
+			Estadiamento:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a2_cancerestadiament"></td>
+	</tr>
+	<tr>
+		<th scope="row" class="text"
+		    title="Data Diagn&oacute;stico"
+		    aria-label="Data Diagn&oacute;stico">
+			Data Diagn&oacute;stico:
+		</th>
+		<td class="text noBorderRight" 
+		    [innerHtml]="selectedObject.a3_dateLabel"></td>
+	</tr>
+</ng-template>
+
+<ng-template #objectDetail let-modal>
+	<delete-confirmation label="do Diagnóstico Câncer" 
+	                     [selectedObject]="selectedObject" 
+	                     info="true" 
+	                     [templateOutlet]="selectedObjectTemplate" 
+	                     (cancelDataEmitter)="showObject()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectDeleteConfirmation let-modal>
+	<delete-confirmation label="Diagnóstico Câncer" 
+	                     [selectedObject]="selectedObject" 
+	                     [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>
+
+<ng-template #objectUnDeleteConfirmation let-modal>
+	<delete-confirmation label="Diagnóstico Câncer" 
+	                     [selectedObject]="selectedObject" 
+	                     redo="true" [auditingExclusions]="auditingExclusions" 
+	                     [templateOutlet]="selectedObjectTemplate"
+	                     (confirmDeleteObjectEmitter)="confirmUnDeleteObject($event)" 
+	                     (cancelDataEmitter)="cancelData()">
+	</delete-confirmation>
+</ng-template>

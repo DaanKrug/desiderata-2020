@@ -135,6 +135,8 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 		                              .subscribe(data => {this.pagemenuitemsView(data.object);});
 		this.subscriptions[i++] = this.eventEmitterService.get('pagemenuitemfiles')
 		                              .subscribe(data => {this.pagemenuitemfilesView(data.object);});
+		this.subscriptions[i++] = this.eventEmitterService.get('cancerdiagnostics')
+		                              .subscribe(data => {this.cancerdiagnosticsView(data.object);});
 	}
 	
 	loadConfig(){
@@ -285,6 +287,17 @@ export class AppComponent extends BaseCrudFilterComponent implements OnInit, OnD
 	}
 	
 	usersView(){ this.navigateTo('users','Pessoas/Usu&aacute;rios'); }
+	
+	cancerdiagnosticsView(user){ 
+		if(this.emptyObject(user)){
+			return;
+		}
+		this.storageService.clear();
+		this.storageService.put(user);
+		var title = 'Paciente: ' + user.name;
+		title += this.viewTitleSeparator + 'Diagnósticos Câncer';
+		this.navigateTo('cancerdiagnostics',title); 
+	}
 	
 	imagesView(){ this.navigateTo('images','Imagens'); }
 	

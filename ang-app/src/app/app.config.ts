@@ -3,7 +3,8 @@ export class AppConfig {
 	static authViews = [
 		'home','mailerconfigs','modules','appconfigs','s3configs',
 		'simplemails','users','applogs','images','files',
-		'pagemenus','pagemenuitems','pagemenuitemfiles'
+		'pagemenus','pagemenuitems','pagemenuitemfiles',
+		'cancerdiagnostics',
 	];
 	
 	static categories = [
@@ -18,6 +19,7 @@ export class AppConfig {
 		['pagemenus',                              ['admin_master','admin','system_auditor']],
 		['pagemenuitems',                          ['admin_master','admin','system_auditor']],
 		['pagemenuitemfiles',                      ['admin_master','admin','system_auditor']],
+		['cancerdiagnostics',                      ['admin_master','admin','system_auditor']],
 		['images',                                 ['admin_master','admin','system_auditor','enroll']],
     ];
 	

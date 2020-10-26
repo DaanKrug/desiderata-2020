@@ -24,18 +24,18 @@ export class UserComponent extends BaseCrudFilterComponent implements OnInit, On
 	  this.setInitializationServices(['user']);
 	  this.crudService = this.userService;
 	  this.sucessErrorMessages = {
-		  200:  'Pessoa/Usuário adicionada com sucesso.',
-		  201:  'Pessoa/Usuário alterada com sucesso.',
-		  2010: 'Pessoa/Usuário inativada com sucesso.',
-		  2011: 'Pessoa/Usuário ativada com sucesso.',
-		  204:  'Pessoa/Usuário excluída com sucesso.',
-		  207:  'Pessoa/Usuário restaurada com sucesso.',
-		  208:  'Pessoa/Usuário excluída [PERMANENTE] com sucesso.',
+		  200:  'Paciente/Profissional da saúde adicionado com sucesso.',
+		  201:  'Paciente/Profissional da saúde alterado com sucesso.',
+		  2010: 'Paciente/Profissional da saúde inativado com sucesso.',
+		  2011: 'Paciente/Profissional da saúde ativado com sucesso.',
+		  204:  'Paciente/Profissional da saúde excluído com sucesso.',
+		  207:  'Paciente/Profissional da saúde restaurado com sucesso.',
+		  208:  'Paciente/Profissional da saúde excluído [PERMANENTE] com sucesso.',
 	  };
-	  this.listTitle = 'Pessoas/Usuários';
-	  this.addTitle = 'Adicionar Pessoa/Usuário';
-	  this.editTitle = 'Editar Pessoa/Usuário';
-	  this.formInfo = ['** Requerido para criar usuário. Em branco mantém o valor atual.'];
+	  this.listTitle = 'Pacientes/Profissionais da saúde';
+	  this.addTitle = 'Adicionar Paciente/Profissional da saúde';
+	  this.editTitle = 'Editar Paciente/Profissional da saúde';
+	  this.formInfo = ['** Requerido para criar paciente/profissional da saúde. Em branco mantém o valor atual.'];
 	  this.dataForm = new FormGroup({
           name: new FormControl('', [Validators.required]),
           email: new FormControl('', [Validators.required,Validators.email]),
@@ -43,8 +43,8 @@ export class UserComponent extends BaseCrudFilterComponent implements OnInit, On
           category: new FormControl('', [Validators.required])
       });
       this.categories = [
-      	  {value: 'enroll' , label: 'Integrante/Participante/Membro'},
-      	  {value: 'admin' , label: 'Administrador'},
+      	  {value: 'enroll' , label: 'Paciente'},
+      	  {value: 'admin' , label: 'Profissional da Saúde'},
       	  {value: 'system_auditor', label: 'Auditor do Sistema'},
       ];
       this.permissionsAuditor = [
@@ -52,7 +52,9 @@ export class UserComponent extends BaseCrudFilterComponent implements OnInit, On
           {value: 'file' , label: 'Arquivo', dependOf: null, breakBefore: false},
           {value: 'image' , label: 'Imagem', dependOf: null, breakBefore: false},
           {value: 'simplemail' , label: 'Envio E-mail', dependOf: null, breakBefore: false},
-          {value: 'user' , label: 'Pessoas/Usuários', dependOf: null, breakBefore: true}
+          {value: 'user' , label: 'Pacientes/Profissionais da Saúde', dependOf: null, breakBefore: true},
+          {value: 'cancerdiagnostic' , label: 'Diagnósticos de Câncer', dependOf: null, breakBefore: true}
+          
 	  ];
 	  this.permissionsAdmin = this.permissionsAuditor;
 	  this.permissionsExternal = [
@@ -216,10 +218,10 @@ export class UserComponent extends BaseCrudFilterComponent implements OnInit, On
 	  return !this.inValidationMsgs();
   }
   
-  toUserPaymentTickets(id){
+  toCancerDiagnostics(id){
 	  this.crudService.loadFromCache(id).then(obj => {
 		  if(this.processObjectAndValidationResult(obj,true)){
-			  this.eventEmitterService.get('userpaymenttickets').emit({object: obj});
+			  this.eventEmitterService.get('cancerdiagnostics').emit({object: obj});
 		  }
 	  });
   }

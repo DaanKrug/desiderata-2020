@@ -22,6 +22,7 @@ defmodule ExApp.Endpoint do
   alias ExApp.PageMenuController
   alias ExApp.PageMenuItemController
   alias ExApp.PageMenuItemFileController
+  alias ExApp.CancerdiagnosticController
   
   
   plug(Plug.Logger, log: :debug)
@@ -46,6 +47,7 @@ defmodule ExApp.Endpoint do
   forward("/pagemenus",                        to: PageMenuController)
   forward("/pagemenuitems",                    to: PageMenuItemController)
   forward("/pagemenuitemfiles",                to: PageMenuItemFileController)
+  forward("/cancerdiagnostics",                to: CancerdiagnosticController)
   
   
   match _ do

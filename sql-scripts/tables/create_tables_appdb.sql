@@ -132,3 +132,19 @@ ALTER TABLE `pagemenuitemfile`
 
 
 
+
+CREATE TABLE `cancerdiagnostic` (
+     `id` bigint(20) UNSIGNED NOT NULL,
+     `a1_cancertype` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a2_cancerestadiament` varchar(250) COLLATE utf8mb4_general_ci NOT NULL,
+     `a3_date` datetime DEFAULT NULL,
+     `a4_userid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+     `ownerId` bigint(20) UNSIGNED NOT NULL,
+     `created_at` timestamp NULL DEFAULT NULL,
+     `updated_at` timestamp NULL DEFAULT NULL,
+     `deleted_at` timestamp NULL DEFAULT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+   
+ALTER TABLE `cancerdiagnostic` ADD PRIMARY KEY (`id`);
+   
+ALTER TABLE `cancerdiagnostic` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

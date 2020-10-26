@@ -255,6 +255,11 @@ defmodule ExApp.MessagesUtil do
                                  Admin Master não pode criar usuário com permissão 
                                  <strong>Comunicação/Acesso Externa</strong>.
                                  """)
+      (messageCode == 100148) -> ReturnUtil.getValidationResult(100148,
+                                 "Falha ao criar <strong>Diagnóstico Câncer</strong>.")
+      (messageCode == 100149) -> ReturnUtil.getValidationResult(100149,
+                                 "Falha ao alterar <strong>Diagnóstico Câncer</strong>.")
+                                 
       true -> systemMessage(0)
     end
   end

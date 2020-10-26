@@ -60,6 +60,11 @@ const routes: Routes = [
     loadChildren: () => import('./management/user/user.module').then(m => m.UserModule),    
     canActivate: [UserServiceRouter] 
   },
+  { path: 'cancerdiagnostics',
+	loadChildren: () => import('./management/user/cancerdiagnostic/cancerdiagnostic.module')
+	  					     .then(m => m.CancerdiagnosticModule), 
+	canActivate: [UserServiceRouter] 
+  },
   { path: 'images',                            
     loadChildren: () => import('./management/image/image.module').then(m => m.ImageModule), 
     canActivate: [UserServiceRouter] 
