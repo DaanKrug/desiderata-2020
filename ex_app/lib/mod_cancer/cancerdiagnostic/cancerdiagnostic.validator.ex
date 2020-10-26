@@ -13,7 +13,7 @@ defmodule ExApp.CancerdiagnosticValidator do
   
   def getA2_cancerestadiament(mapParams,defaultValue \\ nil) do
     value = StringUtil.coalesce(MapUtil.get(mapParams,:a2_cancerestadiament),defaultValue)
-    SanitizerUtil.sanitizeAll(StringUtil.capitalize(value),false,true,20,"A-z0-9")
+    SanitizerUtil.sanitizeAll(StringUtil.capitalize(value),false,true,250,"url")
   end
   
   def getA3_date(mapParams,defaultValue \\ nil) do

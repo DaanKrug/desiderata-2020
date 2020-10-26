@@ -1,0 +1,13 @@
+[Unit]
+Description=Desiderata 2020 App in Elixir/Erlang
+After=mysql.service
+
+[Service]
+Environment="MIX_ENV=prod" "HOME=/var/www/html/desiderata/ex_app/compiled_desiderata/ex_app/bin"
+ExecStart=/usr/local/bin/desiderata_startup.sh
+ExecStop=/usr/local/bin/desiderata_shutdown.sh
+RemainAfterExit=yes
+
+[Install]
+# WantedBy=default.target
+WantedBy=multi-user.target

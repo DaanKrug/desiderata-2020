@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "deployUrl": "https://desiderata-cdn.s3-us-west-2.amazonaws.com/angular/",
+            "deployUrl": "../desiderata/ex_app/priv/static/angular/",
             "aot": true,
             "outputPath": "../static_files/angular/",
             "index": "src/index.html",

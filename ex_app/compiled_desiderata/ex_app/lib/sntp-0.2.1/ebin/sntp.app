@@ -1,0 +1,11 @@
+{application,sntp,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"SNTP v4 client [RFC4330](https://tools.ietf.org/html/rfc4330) for Elixir\n"},
+              {modules,['Elixir.SNTP','Elixir.SNTP.Application',
+                        'Elixir.SNTP.NTPMessage','Elixir.SNTP.Retriever',
+                        'Elixir.SNTP.RetrieverError','Elixir.SNTP.Socket',
+                        'Elixir.SNTP.Timestamp']},
+              {registered,[]},
+              {vsn,"0.2.1"},
+              {env,[{auto_start,false},{retreive_every,86400000}]},
+              {mod,{'Elixir.SNTP.Application',[]}}]}.
